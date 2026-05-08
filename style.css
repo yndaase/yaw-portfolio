@@ -147,20 +147,55 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ── HERO ── */
 .hero {
   padding: 160px 2rem 100px; text-align: center;
-  position: relative; overflow: hidden; background: var(--bg);
+  position: relative; overflow: hidden;
+  background: #07090f;
+  border-bottom: 1px solid rgba(99,102,241,0.15);
 }
+
+/* Dot-grid mesh overlay */
 .hero::before {
-  content: ''; position: absolute; top: -300px; left: 50%;
-  transform: translateX(-50%); width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
-  pointer-events: none;
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; z-index: 0;
 }
-.hero::after {
-  content: ''; position: absolute; bottom: -200px; right: -100px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 70%);
-  pointer-events: none;
+
+/* Animated glow orbs */
+.hero-orb-1 {
+  position: absolute; top: -120px; left: -80px;
+  width: 560px; height: 560px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%);
+  animation: floatOrb 8s ease-in-out infinite alternate;
+  pointer-events: none; z-index: 0;
 }
+.hero-orb-2 {
+  position: absolute; bottom: -160px; right: -60px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,191,36,0.12) 0%, transparent 70%);
+  animation: floatOrb 10s ease-in-out infinite alternate-reverse;
+  pointer-events: none; z-index: 0;
+}
+.hero-orb-3 {
+  position: absolute; top: 40%; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 300px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+@keyframes floatOrb {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.06); }
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+/* Override text colors for dark hero */
+.hero .hero-sub     { color: rgba(255,255,255,0.6); }
+.hero h1            { color: #fff; }
+.hero .hero-badge   { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.35); color: #a5b4fc; }
+.hero .social-btn   { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); }
+.hero .social-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: #fff; }
 
 .hero-photo-wrapper {
   width: 140px; height: 140px; margin: 0 auto 2rem;
